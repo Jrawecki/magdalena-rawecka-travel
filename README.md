@@ -2,6 +2,8 @@
 
 A refined, responsive landing page designed as a quiet digital calling card for an independent high-end travel advisor.
 
+**Live demo:** [magdalena-rawecka-travel.vercel.app](https://magdalena-rawecka-travel.vercel.app)
+
 ## Run locally
 
 ```powershell
