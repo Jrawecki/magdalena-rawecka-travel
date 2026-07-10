@@ -1,24 +1,6 @@
 import { useEffect } from 'react'
 import { CONTACT, EMAIL_LINK, PHONE_LINK } from './contact'
 
-const services = [
-  {
-    number: '01',
-    title: 'Bespoke planning',
-    copy: 'Every journey begins with a conversation: how you like to travel, what matters to you, and how you want the time to feel. From there, I shape an itinerary that is considered as a whole—not simply a collection of bookings.',
-  },
-  {
-    number: '02',
-    title: 'Details and coordination',
-    copy: 'Flights, stays, transfers, reservations and the practicalities in between are brought into one clear plan. Each detail is considered in relation to the next, so the journey feels well paced from beginning to end.',
-  },
-  {
-    number: '03',
-    title: 'Support while you travel',
-    copy: 'Plans sometimes shift. While you are away, I remain a point of contact for questions and changes, allowing you to stay present in the journey.',
-  },
-]
-
 const journeys = [
   {
     number: '01',
@@ -43,24 +25,6 @@ const journeys = [
     image: '/images/journey-cities.webp',
     alt: 'A quiet European railway platform beneath an iron canopy',
     className: 'journey journey--three',
-  },
-]
-
-const process = [
-  {
-    number: '01',
-    title: 'First, we talk.',
-    copy: 'We begin with a conversation about the occasion, the people travelling and the way you want the journey to feel.',
-  },
-  {
-    number: '02',
-    title: 'Then, the journey takes shape.',
-    copy: 'I develop the route, stays and details, refining them with you until the plan feels entirely your own.',
-  },
-  {
-    number: '03',
-    title: 'Finally, you travel.',
-    copy: 'With everything gathered into one clear itinerary, you set off. I remain available if plans need attention along the way.',
   },
 ]
 
@@ -141,20 +105,15 @@ function App() {
           </div>
         </section>
 
-        <section className="services shell" id="services" aria-labelledby="services-title">
-          <header className="section-heading reveal">
-            <p className="section-label">Services</p>
-            <h2 id="services-title">Care at every stage.</h2>
-          </header>
-          <div className="services__list">
-            {services.map((service) => (
-              <article className="service reveal" key={service.number}>
-                <p className="item-number">{service.number}</p>
-                <h3>{service.title}</h3>
-                <p>{service.copy}</p>
-              </article>
-            ))}
-          </div>
+        <section className="services shell reveal" id="services" aria-labelledby="services-title">
+          <p className="section-label">Services</p>
+          <h2 id="services-title">One journey,<br />considered as a whole.</h2>
+          <p className="services__summary">
+            I shape each trip around the way you want to travel, bringing the route, stays and practical details into one clear plan—and remaining available while you are away.
+          </p>
+          <p className="services__scope" aria-label="Service scope">
+            Itinerary design <span aria-hidden="true">/</span> stays and reservations <span aria-hidden="true">/</span> travel coordination <span aria-hidden="true">/</span> support while away
+          </p>
         </section>
 
         <section className="journeys" id="journeys" aria-labelledby="journeys-title">
@@ -206,19 +165,19 @@ function App() {
           </div>
         </section>
 
-        <section className="process shell" aria-labelledby="process-title">
-          <header className="section-heading reveal">
-            <p className="section-label">Process</p>
-            <h2 id="process-title">Simple, from the start.</h2>
-          </header>
-          <div className="process__list">
-            {process.map((step) => (
-              <article className="process__step reveal" key={step.number}>
-                <p className="item-number">{step.number}</p>
-                <h3>{step.title}</h3>
-                <p>{step.copy}</p>
-              </article>
-            ))}
+        <section className="process" id="process" aria-labelledby="process-title">
+          <div className="process__inner shell reveal">
+            <p className="section-label">How it works</p>
+            <h2 id="process-title">It begins with a conversation.</h2>
+            <div className="process__narrative">
+              <p>
+                We talk about where you want to go, who is travelling and how you want the time to feel.
+              </p>
+              <p>
+                From there, I shape and refine the journey with you, gathering every detail into a clear itinerary before you leave.
+              </p>
+              <p className="process__note">Personal from first idea to final itinerary.</p>
+            </div>
           </div>
         </section>
       </main>
