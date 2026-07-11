@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { CONTACT, EMAIL_LINK, PHONE_LINK } from './contact'
+import { CONTACT, EMAIL_LINK, PHONE_LINK, WHATSAPP_LINK } from './contact'
 
 const journeys = [
   {
@@ -143,6 +143,12 @@ function App() {
         <section className="about" id="about" aria-labelledby="about-title">
           <div className="about__inner shell reveal">
             <div className="about__visuals">
+              <figure className="about__portrait" aria-label="Reserved space for a future portrait of Magdalena">
+                <div className="about__portrait-frame">
+                  <span>Portrait to follow</span>
+                </div>
+                <figcaption>Magdalena / portrait</figcaption>
+              </figure>
               <div className="about__cards" aria-label="Business card front and back">
                 <figure className="business-card">
                   <div className="business-card__face business-card__face--front">
@@ -159,12 +165,6 @@ function App() {
                   <figcaption>Reverse</figcaption>
                 </figure>
               </div>
-              <figure className="about__portrait" aria-label="Reserved space for a future portrait of Magdalena">
-                <div className="about__portrait-frame">
-                  <span>Portrait to follow</span>
-                </div>
-                <figcaption>Magdalena / portrait</figcaption>
-              </figure>
             </div>
             <div className="about__copy">
               <p className="section-label">About Magdalena</p>
@@ -180,21 +180,6 @@ function App() {
           </div>
         </section>
 
-        <section className="process" id="process" aria-labelledby="process-title">
-          <div className="process__inner shell reveal">
-            <p className="section-label">How it works</p>
-            <h2 id="process-title">It begins with a conversation.</h2>
-            <div className="process__narrative">
-              <p>
-                We talk about where you want to go, who is travelling and how you want the time to feel.
-              </p>
-              <p>
-                From there, I shape and refine the journey with you, gathering every detail into a clear itinerary before you leave.
-              </p>
-              <p className="process__note">Personal from first idea to final itinerary.</p>
-            </div>
-          </div>
-        </section>
       </main>
 
       <footer className="contact" aria-labelledby="contact-title">
@@ -214,6 +199,10 @@ function App() {
             <div>
               <p>Telephone</p>
               <a href={PHONE_LINK}>{CONTACT.phoneLabel}</a>
+            </div>
+            <div>
+              <p>WhatsApp</p>
+              <a href={WHATSAPP_LINK}>{CONTACT.whatsappLabel}</a>
             </div>
           </address>
           <div className="contact__foot">
