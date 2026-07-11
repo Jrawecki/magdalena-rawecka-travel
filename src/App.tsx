@@ -65,7 +65,7 @@ function App() {
           <span className="identity__role">Independent Travel Advisor</span>
         </a>
         <nav aria-label="Primary navigation">
-          <a href="#services">Services</a>
+          <a href="#approach">Approach</a>
           <a href="#journeys">Journeys</a>
           <a href="#about">About</a>
         </nav>
@@ -93,27 +93,22 @@ function App() {
           </figure>
         </section>
 
-        <section className="introduction shell reveal" aria-labelledby="introduction-title">
-          <p className="section-label" id="introduction-title">A considered approach</p>
+        <section className="introduction shell reveal" id="approach" aria-labelledby="approach-title">
+          <p className="section-label">A considered approach</p>
           <div className="introduction__copy">
-            <p>
-              Some journeys need more than a list of reservations. They need someone who understands how the pieces fit together.
-            </p>
-            <p>
-              I work closely with each client to shape a journey around the way they want to travel—from the first idea to the smallest detail.
+            <h2 id="approach-title">The whole journey, considered.</h2>
+            <div className="introduction__body">
+              <p>
+                I work closely with each client to shape a journey around the way they want to travel—from the first idea to the smallest detail.
+              </p>
+              <p>
+                I bring the route, stays and practical details into one clear plan. While you travel, I remain discreetly available—making sure each stay is ready for your arrival and stepping in only when needed.
+              </p>
+            </div>
+            <p className="introduction__scope" aria-label="Planning services">
+              Itinerary design <span aria-hidden="true">/</span> stays and reservations <span aria-hidden="true">/</span> travel coordination <span aria-hidden="true">/</span> quiet care along the way
             </p>
           </div>
-        </section>
-
-        <section className="services shell reveal" id="services" aria-labelledby="services-title">
-          <p className="section-label">Services</p>
-          <h2 id="services-title">One journey,<br />considered as a whole.</h2>
-          <p className="services__summary">
-            I shape each trip around the way you want to travel, bringing the route, stays and practical details into one clear plan. While you travel, I remain discreetly available—helping make sure each stay is ready for your arrival and stepping in only when needed.
-          </p>
-          <p className="services__scope" aria-label="Service scope">
-            Itinerary design <span aria-hidden="true">/</span> stays and reservations <span aria-hidden="true">/</span> travel coordination <span aria-hidden="true">/</span> quiet care along the way
-          </p>
         </section>
 
         <section className="journeys" id="journeys" aria-labelledby="journeys-title">
@@ -147,10 +142,30 @@ function App() {
 
         <section className="about" id="about" aria-labelledby="about-title">
           <div className="about__inner shell reveal">
-            <aside className="about__signature" aria-label="Magdalena Rawecka monogram">
-              <span>MR</span>
-              <p>A personal practice</p>
-            </aside>
+            <div className="about__visuals">
+              <div className="about__cards" aria-label="Business card front and back">
+                <figure className="business-card">
+                  <div className="business-card__face business-card__face--front">
+                    <span className="business-card__name">Magdalena Rawecka</span>
+                    <span className="business-card__role">Independent Travel Advisor</span>
+                  </div>
+                  <figcaption>Front</figcaption>
+                </figure>
+                <figure className="business-card">
+                  <div className="business-card__face business-card__face--reverse">
+                    <span className="business-card__monogram">MR</span>
+                    <span className="business-card__tagline">Travel, thoughtfully arranged.</span>
+                  </div>
+                  <figcaption>Reverse</figcaption>
+                </figure>
+              </div>
+              <figure className="about__portrait" aria-label="Reserved space for a future portrait of Magdalena">
+                <div className="about__portrait-frame">
+                  <span>Portrait to follow</span>
+                </div>
+                <figcaption>Magdalena / portrait</figcaption>
+              </figure>
+            </div>
             <div className="about__copy">
               <p className="section-label">About Magdalena</p>
               <h2 id="about-title">Thoughtful planning, personally handled.</h2>
@@ -161,7 +176,7 @@ function App() {
                 I believe the best journeys feel both considered and natural. The care is in the pacing, the transitions and the details that allow you to be fully present once you leave.
               </p>
             </div>
-            {/* A future portrait can replace about__signature without changing the layout. */}
+            {/* Replace about__portrait-frame with Magdalena's real portrait when available. */}
           </div>
         </section>
 

@@ -244,8 +244,8 @@ nav a:focus-visible::after,
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   column-gap: 1.5rem;
-  padding-top: var(--section-space);
-  padding-bottom: var(--section-space);
+  padding-top: clamp(7rem, 11vw, 11rem);
+  padding-bottom: clamp(7rem, 11vw, 11rem);
   border-top: 1px solid var(--rule);
 }
 
@@ -254,65 +254,42 @@ nav a:focus-visible::after,
 }
 
 .introduction__copy {
-  grid-column: 4 / 12;
+  min-width: 0;
+  grid-column: 4 / 13;
 }
 
-.introduction__copy p:first-child {
+.introduction__copy h2 {
+  max-width: 10ch;
   font-family: var(--serif);
-  font-size: clamp(2.55rem, 4.5vw, 5.25rem);
-  font-weight: 300;
-  letter-spacing: -0.015em;
-  line-height: 1.08;
-  text-wrap: balance;
-}
-
-.introduction__copy p:last-child {
-  max-width: 38rem;
-  margin-top: clamp(2.5rem, 5vw, 5rem);
-  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
-}
-
-.services h2,
-.journeys__heading h2,
-.about__copy h2,
-.process h2,
-.contact h2 {
-  font-family: var(--serif);
+  font-size: clamp(3rem, 5vw, 5.5rem);
   font-weight: 300;
   letter-spacing: -0.018em;
+  line-height: 1;
   text-wrap: balance;
 }
 
-.services {
+.introduction__body {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 1.5rem;
-  align-items: end;
-  padding-bottom: clamp(7rem, 10vw, 10rem);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(2rem, 4vw, 4.5rem);
+  margin-top: clamp(2.5rem, 5vw, 4.75rem);
 }
 
-.services .section-label {
-  grid-column: 1 / 3;
-  align-self: start;
-  padding-top: 0.85rem;
-}
-
-.services h2 {
-  grid-column: 3 / 9;
-  font-size: clamp(3.6rem, 6vw, 6.9rem);
-  line-height: 1;
-}
-
-.services__summary {
-  max-width: 28rem;
-  grid-column: 9 / 13;
-  padding-bottom: 0.35rem;
+.introduction__body p {
+  max-width: 32rem;
+  color: #57534b;
   font-size: clamp(1rem, 1.25vw, 1.16rem);
-  line-height: 1.7;
+  line-height: 1.75;
 }
 
-.services__scope {
-  grid-column: 3 / 13;
+.introduction__body p:first-child {
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(1.25rem, 1.7vw, 1.6rem);
+  line-height: 1.55;
+}
+
+.introduction__scope {
   margin-top: clamp(3rem, 5vw, 5rem);
   padding-top: 1.35rem;
   border-top: 1px solid var(--rule);
@@ -324,9 +301,20 @@ nav a:focus-visible::after,
   text-transform: uppercase;
 }
 
-.services__scope span {
+.introduction__scope span {
   margin-inline: clamp(0.65rem, 1.4vw, 1.6rem);
   color: rgba(30, 30, 26, 0.34);
+}
+
+.introduction__copy h2,
+.journeys__heading h2,
+.about__copy h2,
+.process h2,
+.contact h2 {
+  font-family: var(--serif);
+  font-weight: 300;
+  letter-spacing: -0.018em;
+  text-wrap: balance;
 }
 
 .journey h3 {
@@ -439,7 +427,7 @@ nav a:focus-visible::after,
 }
 
 .about {
-  padding-block: var(--section-space);
+  padding-block: clamp(5.75rem, 8vw, 8rem);
   color: var(--light);
   background: var(--olive);
 }
@@ -448,36 +436,109 @@ nav a:focus-visible::after,
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 1.5rem;
+  align-items: start;
 }
 
-.about__signature {
-  display: flex;
-  min-height: 31rem;
+.about__visuals {
+  width: 100%;
+  max-width: 24rem;
   grid-column: 1 / 5;
+}
+
+.about__cards {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.business-card__face {
+  display: flex;
+  aspect-ratio: 7 / 4;
+  padding: clamp(1.2rem, 2vw, 1.65rem);
+  color: var(--ink);
+  background: #fffdf8;
+  border: 1px solid rgba(30, 30, 26, 0.12);
+  box-shadow: 0 12px 30px rgba(24, 23, 19, 0.13);
+}
+
+.business-card__face--front {
   flex-direction: column;
   justify-content: space-between;
-  padding: 1.8rem;
-  border: 1px solid var(--rule-light);
 }
 
-.about__signature span {
+.business-card__face--reverse {
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.business-card__name,
+.business-card__tagline,
+.business-card__monogram {
   font-family: var(--serif);
-  font-size: clamp(6rem, 11vw, 10.5rem);
   font-weight: 300;
-  letter-spacing: -0.04em;
-  line-height: 0.96;
 }
 
-.about__signature p {
+.business-card__name {
+  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+  line-height: 1.15;
+}
+
+.business-card__role,
+.business-card figcaption,
+.about__portrait figcaption {
+  font-size: 0.58rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.business-card__role {
+  color: #777268;
+}
+
+.business-card__monogram {
+  font-size: clamp(2.6rem, 4vw, 3.4rem);
+  letter-spacing: -0.03em;
+  line-height: 0.9;
+}
+
+.business-card__tagline {
+  max-width: 8.5ch;
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  line-height: 1.15;
+  text-align: right;
+}
+
+.business-card figcaption,
+.about__portrait figcaption {
+  margin-top: 0.55rem;
   color: rgba(245, 240, 231, 0.7);
-  font-size: 0.65rem;
+}
+
+.about__portrait {
+  width: min(58%, 13.5rem);
+  margin: 2.25rem 0 0 auto;
+}
+
+.about__portrait-frame {
+  display: grid;
+  aspect-ratio: 4 / 5;
+  place-items: center;
+  border: 1px solid var(--rule-light);
+  background: rgba(245, 240, 231, 0.035);
+}
+
+.about__portrait-frame span {
+  color: rgba(245, 240, 231, 0.58);
+  font-size: 0.59rem;
   font-weight: 400;
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
 .about__copy {
-  grid-column: 6 / 12;
+  grid-column: 6 / 13;
 }
 
 .about .section-label {
@@ -485,23 +546,23 @@ nav a:focus-visible::after,
 }
 
 .about__copy h2 {
-  max-width: 10ch;
-  margin: clamp(2rem, 4vw, 4rem) 0;
-  font-size: clamp(3.2rem, 6.5vw, 7.25rem);
-  line-height: 0.99;
+  max-width: 11ch;
+  margin: clamp(1.75rem, 3vw, 3rem) 0;
+  font-size: clamp(3rem, 4.9vw, 5.5rem);
+  line-height: 1;
 }
 
 .about__copy > p:not(.section-label) {
-  max-width: 40rem;
+  max-width: 36rem;
   color: rgba(245, 240, 231, 0.76);
 }
 
 .about__copy .about__lead {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
   color: var(--light);
   font-family: var(--serif);
-  font-size: clamp(1.45rem, 2vw, 2rem);
-  line-height: 1.45;
+  font-size: clamp(1.25rem, 1.55vw, 1.6rem);
+  line-height: 1.5;
 }
 
 .process {
@@ -716,24 +777,6 @@ nav a:focus-visible::after,
     grid-column: 4 / 13;
   }
 
-  .services .section-label {
-    grid-column: 1 / 4;
-  }
-
-  .services h2,
-  .services__summary {
-    grid-column: 4 / 13;
-  }
-
-  .services__summary {
-    max-width: 36rem;
-    margin-top: 2rem;
-  }
-
-  .services__scope {
-    grid-column: 4 / 13;
-  }
-
   .journeys__heading {
     grid-template-columns: 8fr 4fr;
   }
@@ -760,7 +803,8 @@ nav a:focus-visible::after,
     grid-column: 1 / 5;
   }
 
-  .about__signature {
+  .about__visuals {
+    max-width: 20rem;
     grid-column: 1 / 5;
   }
 
@@ -848,8 +892,26 @@ nav a:focus-visible::after,
     margin-top: 3rem;
   }
 
-  .introduction__copy p:first-child {
-    font-size: clamp(2.4rem, 11vw, 3.4rem);
+  .introduction__copy h2 {
+    font-size: clamp(3.1rem, 13vw, 4.75rem);
+  }
+
+  .introduction__body {
+    display: block;
+    margin-top: 2.5rem;
+  }
+
+  .introduction__body p + p {
+    margin-top: 1.5rem;
+  }
+
+  .introduction__scope {
+    margin-top: 3rem;
+    line-height: 2.2;
+  }
+
+  .introduction__scope span {
+    margin-inline: 0.45rem;
   }
 
   .journeys__heading,
@@ -859,33 +921,6 @@ nav a:focus-visible::after,
 
   .journeys__heading h2 {
     margin-top: 1.5rem;
-  }
-
-  .services {
-    display: block;
-    padding-bottom: 6.25rem;
-  }
-
-  .services .section-label {
-    padding-top: 0;
-  }
-
-  .services h2 {
-    margin-top: 1.5rem;
-    font-size: clamp(3.25rem, 15vw, 5rem);
-  }
-
-  .services__summary {
-    margin-top: 2.25rem;
-  }
-
-  .services__scope {
-    margin-top: 3rem;
-    line-height: 2.2;
-  }
-
-  .services__scope span {
-    margin-inline: 0.45rem;
   }
 
   .journeys__heading > p {
@@ -913,16 +948,55 @@ nav a:focus-visible::after,
   }
 
   .about__inner {
-    display: block;
+    display: flex;
+    flex-direction: column;
   }
 
-  .about__signature {
-    min-height: 18rem;
-    margin-bottom: 4rem;
+  .about__copy {
+    order: 1;
+  }
+
+  .about__visuals {
+    width: 100%;
+    max-width: none;
+    order: 2;
+    margin-top: 3.5rem;
+  }
+
+  .about__cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .business-card__face {
+    padding: 1rem;
+  }
+
+  .business-card__name {
+    font-size: 0.95rem;
+  }
+
+  .business-card__tagline {
+    font-size: 0.9rem;
+  }
+
+  .business-card__monogram {
+    font-size: 2.25rem;
+  }
+
+  .about__portrait {
+    width: 10rem;
+    margin: 2rem 0 0 auto;
   }
 
   .about__copy h2 {
-    font-size: clamp(3.1rem, 14vw, 5rem);
+    margin: 1.5rem 0 2rem;
+    font-size: clamp(2.65rem, 11vw, 3.75rem);
+  }
+
+  .about__copy .about__lead {
+    font-size: 1.15rem;
+    line-height: 1.5;
   }
 
   .process__inner {
@@ -975,6 +1049,29 @@ nav a:focus-visible::after,
   .contact__foot {
     align-items: flex-start;
     flex-direction: column;
+  }
+}
+
+@media (max-width: 420px) {
+  .about__cards {
+    max-width: 20rem;
+    grid-template-columns: 1fr;
+  }
+
+  .business-card__face {
+    padding: 1.25rem;
+  }
+
+  .business-card__name {
+    font-size: 1.1rem;
+  }
+
+  .business-card__tagline {
+    font-size: 1rem;
+  }
+
+  .about__portrait {
+    width: 9.5rem;
   }
 }
 
