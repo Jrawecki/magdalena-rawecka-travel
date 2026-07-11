@@ -6,6 +6,11 @@
   --ink: #1e1e1a;
   --stone: #817c70;
   --olive: #474b3d;
+  --about: #343a36;
+  --sleeve: #71807a;
+  --sleeve-deep: #5e6c67;
+  --card-stock: #eeeadd;
+  --card-ink: #504d47;
   --brown: #2a2722;
   --light: #f5f0e7;
   --rule: rgba(30, 30, 26, 0.2);
@@ -91,6 +96,17 @@ a {
 
 .skip-link:focus {
   transform: translateY(0);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 
 .site-header {
@@ -361,19 +377,97 @@ nav a:focus-visible::after,
 }
 
 .journey__image {
+  position: relative;
   overflow: hidden;
+  background: #d8d1c5;
+  isolation: isolate;
+  touch-action: pan-y;
 }
 
-.journey__image img {
+.journey__photo {
   aspect-ratio: 3 / 2;
   object-fit: cover;
   filter: saturate(0.74) contrast(0.98);
+  animation: journey-photo-in 280ms ease-out both;
   transition: filter 600ms ease, transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-.journey:hover .journey__image img {
-  filter: saturate(0.88) contrast(1);
-  transform: scale(1.012);
+.journey__control {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  place-items: center;
+  color: var(--light);
+  border: 1px solid rgba(245, 240, 231, 0.62);
+  border-radius: 0;
+  background: rgba(30, 30, 26, 0.7);
+  box-shadow: 0 0.4rem 1.2rem rgba(30, 30, 26, 0.15);
+  cursor: pointer;
+  transform: translateY(-50%);
+  backdrop-filter: blur(8px);
+  transition: background-color 200ms ease, border-color 200ms ease, transform 200ms ease;
+}
+
+.journey__control--previous {
+  left: 0.9rem;
+}
+
+.journey__control--next {
+  right: 0.9rem;
+}
+
+.journey__control svg {
+  width: 1.45rem;
+  height: 1.45rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  stroke-width: 1.35;
+}
+
+.journey__control:active {
+  transform: translateY(-50%) scale(0.96);
+}
+
+.journey__control:focus-visible {
+  outline: 2px solid var(--light);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 5px rgba(30, 30, 26, 0.76);
+}
+
+.journey__counter {
+  position: absolute;
+  z-index: 2;
+  right: 0.9rem;
+  bottom: 0.9rem;
+  padding: 0.42rem 0.58rem 0.36rem;
+  color: var(--light);
+  border: 1px solid rgba(245, 240, 231, 0.48);
+  background: rgba(30, 30, 26, 0.68);
+  font-size: 0.62rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  line-height: 1;
+  backdrop-filter: blur(8px);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .journey__image:hover .journey__photo {
+    filter: saturate(0.88) contrast(1);
+    transform: scale(1.012);
+  }
+
+  .journey__control:hover {
+    border-color: var(--light);
+    background: rgba(30, 30, 26, 0.86);
+    transform: translateY(-50%) scale(1.04);
+  }
 }
 
 .journey__copy {
@@ -390,9 +484,11 @@ nav a:focus-visible::after,
   text-wrap: balance;
 }
 
-.journey__copy > p:last-child {
+.journey__description {
+  min-height: 8.25em;
   max-width: 28rem;
   color: #5a564e;
+  animation: journey-copy-in 220ms ease-out both;
 }
 
 .journey--one .journey__image {
@@ -428,7 +524,7 @@ nav a:focus-visible::after,
 .about {
   padding-block: clamp(5.75rem, 8vw, 8rem);
   color: var(--light);
-  background: var(--olive);
+  background: var(--about);
 }
 
 .about__inner {
@@ -440,51 +536,150 @@ nav a:focus-visible::after,
 
 .about__visuals {
   width: 100%;
-  max-width: 24rem;
-  grid-column: 1 / 5;
+  max-width: 42rem;
+  grid-column: 1 / 7;
 }
 
-.about__cards {
-  display: grid;
-  gap: 0.9rem;
+.card-presentation {
+  width: 100%;
+  max-width: 42rem;
 }
 
-.business-card__face {
-  display: flex;
+.card-presentation__control {
+  display: block;
+  width: 100%;
+  padding: 0;
+  color: inherit;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  text-align: inherit;
+}
+
+.card-presentation__control:focus-visible {
+  outline: 1px solid rgba(245, 240, 231, 0.88);
+  outline-offset: 0.55rem;
+}
+
+.card-presentation__stage {
+  --object-width: 56%;
+  --card-rest: 8%;
+  --card-pull: 64%;
+  --sleeve-notch: clamp(1.15rem, 3vw, 2.1rem);
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 1;
+  isolation: isolate;
+}
+
+.card-sleeve,
+.sleeved-card {
+  position: absolute;
+  top: 50%;
+  width: var(--object-width);
   aspect-ratio: 7 / 4;
-  padding: clamp(1.2rem, 2vw, 1.65rem);
-  color: var(--ink);
-  background: #fffdf8;
-  border: 1px solid rgba(30, 30, 26, 0.12);
-  box-shadow: 0 12px 30px rgba(24, 23, 19, 0.13);
 }
 
-.business-card__face--front {
+.card-sleeve {
+  left: 0;
+  background-color: var(--sleeve);
+}
+
+.card-sleeve--back {
+  z-index: 1;
+  background: var(--sleeve-deep);
+  box-shadow: 0 1.7rem 3.4rem rgba(14, 18, 16, 0.34);
+  transform: translate3d(0.16rem, calc(-50% + 0.18rem), 0);
+}
+
+.sleeved-card {
+  z-index: 2;
+  left: var(--card-rest);
+  display: flex;
+  align-items: center;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  padding: clamp(0.7rem, 2vw, 1.4rem);
+  color: var(--card-ink);
+  border: 1px solid rgba(58, 56, 51, 0.13);
+  background:
+    linear-gradient(105deg, rgba(255, 255, 255, 0.24), transparent 38%),
+    var(--card-stock);
+  box-shadow: 0 0.7rem 1.7rem rgba(14, 18, 16, 0.16);
+  transform: translate3d(0, -50%, 0) rotate(-0.12deg);
+  transition: transform 820ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 820ms ease;
+  will-change: transform;
 }
 
-.business-card__face--reverse {
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 1rem;
+.sleeved-card::after {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  content: '';
+  pointer-events: none;
 }
 
-.business-card__name,
-.business-card__tagline,
-.business-card__monogram {
+.sleeved-card__name {
   font-family: var(--serif);
+  font-size: clamp(0.8rem, 2vw, 1.4rem);
   font-weight: 300;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+  white-space: nowrap;
 }
 
-.business-card__name {
-  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
-  line-height: 1.15;
+.sleeved-card__role {
+  margin-top: clamp(0.18rem, 0.45vw, 0.34rem);
+  font-size: clamp(0.38rem, 0.82vw, 0.62rem);
+  font-weight: 400;
+  letter-spacing: 0.07em;
+  line-height: 1.3;
+  white-space: nowrap;
 }
 
-.business-card__role,
-.business-card figcaption,
+.card-sleeve--front {
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 28% 18%, rgba(255, 255, 255, 0.075), transparent 32%),
+    linear-gradient(115deg, rgba(255, 255, 255, 0.045), transparent 42%, rgba(27, 36, 33, 0.075)),
+    var(--sleeve);
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.13),
+    inset -1px 0 rgba(25, 32, 30, 0.14);
+  transform: translateY(-50%);
+  -webkit-mask-image: radial-gradient(circle at 100% 50%, transparent 0 var(--sleeve-notch), #000 calc(var(--sleeve-notch) + 1px));
+  mask-image: radial-gradient(circle at 100% 50%, transparent 0 var(--sleeve-notch), #000 calc(var(--sleeve-notch) + 1px));
+}
+
+.card-sleeve__monogram {
+  color: rgba(43, 53, 49, 0.44);
+  font-family: var(--serif);
+  font-size: clamp(0.62rem, 1.15vw, 0.86rem);
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-shadow: 0 1px rgba(255, 255, 255, 0.2);
+  transform: translateX(-0.25rem) rotate(-90deg);
+}
+
+.card-presentation__control[aria-pressed='true'] .sleeved-card,
+.card-presentation__control:focus-visible .sleeved-card {
+  box-shadow: 0 1.35rem 2.7rem rgba(14, 18, 16, 0.24);
+  transform: translate3d(var(--card-pull), -50%, 0) rotate(0.1deg);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card-presentation__control:hover .sleeved-card {
+    box-shadow: 0 1.35rem 2.7rem rgba(14, 18, 16, 0.24);
+    transform: translate3d(var(--card-pull), -50%, 0) rotate(0.1deg);
+  }
+}
+
+.card-presentation__caption,
 .about__portrait figcaption {
+  color: rgba(245, 240, 231, 0.7);
   font-size: 0.58rem;
   font-weight: 400;
   letter-spacing: 0.14em;
@@ -492,27 +687,33 @@ nav a:focus-visible::after,
   text-transform: uppercase;
 }
 
-.business-card__role {
-  color: #777268;
+.card-presentation__caption {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.25rem;
+  margin-top: 0.65rem;
 }
 
-.business-card__monogram {
-  font-size: clamp(2.6rem, 4vw, 3.4rem);
-  letter-spacing: -0.03em;
-  line-height: 0.9;
-}
-
-.business-card__tagline {
-  max-width: 8.5ch;
-  font-size: clamp(1rem, 1.6vw, 1.25rem);
-  line-height: 1.15;
+.card-presentation__caption > span:last-child {
+  color: rgba(245, 240, 231, 0.48);
+  letter-spacing: 0.1em;
   text-align: right;
 }
 
-.business-card figcaption,
+.card-presentation__caption > span:last-child span {
+  display: inline-block;
+  margin-left: 0.3rem;
+  transition: transform 300ms ease;
+}
+
 .about__portrait figcaption {
   margin-top: 0.55rem;
-  color: rgba(245, 240, 231, 0.7);
+}
+
+.card-presentation:has(.card-presentation__control:hover) .card-presentation__caption > span:last-child span,
+.card-presentation:has(.card-presentation__control[aria-pressed='true']) .card-presentation__caption > span:last-child span {
+  transform: translateX(0.25rem);
 }
 
 .about__portrait {
@@ -537,7 +738,7 @@ nav a:focus-visible::after,
 }
 
 .about__copy {
-  grid-column: 6 / 13;
+  grid-column: 8 / 13;
 }
 
 .about .section-label {
@@ -715,6 +916,30 @@ nav a:focus-visible::after,
   transform: translateY(0);
 }
 
+@keyframes journey-photo-in {
+  from {
+    opacity: 0.72;
+    transform: scale(1.008);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes journey-copy-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.25rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes page-in {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -756,12 +981,12 @@ nav a:focus-visible::after,
   }
 
   .about__visuals {
-    max-width: 20rem;
-    grid-column: 1 / 5;
+    max-width: 32rem;
+    grid-column: 1 / 6;
   }
 
   .about__copy {
-    grid-column: 5 / 13;
+    grid-column: 6 / 13;
   }
 
   .contact__heading,
@@ -782,6 +1007,58 @@ nav a:focus-visible::after,
     grid-column: 2;
     width: fit-content;
     margin-top: 2rem;
+  }
+}
+
+@media (max-width: 840px) {
+  .journey {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+
+  .journey__copy {
+    order: 2;
+  }
+
+  .journey__copy h3 {
+    max-width: 12ch;
+  }
+
+  .journey__description {
+    min-height: 0;
+  }
+
+  .journey--two .journey__image {
+    order: 1;
+  }
+
+  .about__inner {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about__copy {
+    order: 1;
+  }
+
+  .about__visuals {
+    display: flex;
+    width: 100%;
+    max-width: none;
+    flex-direction: column;
+    order: 2;
+    margin-top: 3.5rem;
+  }
+
+  .card-presentation {
+    order: 1;
+  }
+
+  .about__portrait {
+    order: 2;
+    margin: 3rem 0 0 auto;
   }
 }
 
@@ -867,65 +1144,27 @@ nav a:focus-visible::after,
     margin-top: 2.5rem;
   }
 
-  .journey {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    align-items: stretch;
+  .journey__control {
+    width: 2.875rem;
+    height: 2.875rem;
   }
 
-  .journey__copy {
-    order: 2;
+  .journey__control--previous {
+    left: 0.625rem;
   }
 
-  .journey__copy h3 {
-    max-width: 12ch;
+  .journey__control--next,
+  .journey__counter {
+    right: 0.625rem;
   }
 
-  .journey--two .journey__image {
-    order: 1;
-  }
-
-  .about__inner {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .about__copy {
-    order: 1;
-  }
-
-  .about__visuals {
-    width: 100%;
-    max-width: none;
-    order: 2;
-    margin-top: 3.5rem;
-  }
-
-  .about__cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.75rem;
-  }
-
-  .business-card__face {
-    padding: 1rem;
-  }
-
-  .business-card__name {
-    font-size: 0.95rem;
-  }
-
-  .business-card__tagline {
-    font-size: 0.9rem;
-  }
-
-  .business-card__monogram {
-    font-size: 2.25rem;
+  .journey__counter {
+    bottom: 0.625rem;
   }
 
   .about__portrait {
     width: 10rem;
-    margin: 2rem 0 0 auto;
+    margin: 2.5rem 0 0 auto;
   }
 
   .about__copy h2 {
@@ -972,21 +1211,21 @@ nav a:focus-visible::after,
 }
 
 @media (max-width: 420px) {
-  .about__cards {
-    max-width: 20rem;
-    grid-template-columns: 1fr;
+  .card-presentation__stage {
+    --object-width: 58%;
+    --card-rest: 7.5%;
+    --card-pull: 59%;
+    aspect-ratio: 2.8 / 1;
   }
 
-  .business-card__face {
-    padding: 1.25rem;
+  .card-presentation__caption {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.35rem;
   }
 
-  .business-card__name {
-    font-size: 1.1rem;
-  }
-
-  .business-card__tagline {
-    font-size: 1rem;
+  .card-presentation__caption > span:last-child {
+    text-align: left;
   }
 
   .about__portrait {

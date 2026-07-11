@@ -1,30 +1,74 @@
 import { useEffect } from 'react'
 import { CONTACT, EMAIL_LINK, PHONE_LINK, WHATSAPP_LINK } from './contact'
+import { BusinessCardSleeve } from './BusinessCardSleeve'
+import { JourneyAlbum, type Journey } from './JourneyAlbum'
 
-const journeys = [
+const journeys: Journey[] = [
   {
     number: '01',
     title: 'A slower Mediterranean',
-    copy: 'Long lunches, small coastal stays and enough unplanned time to follow the day. A journey shaped around fewer places, longer stays and an unhurried rhythm.',
-    image: '/images/journey-mediterranean.webp',
-    alt: 'A quiet stone lane leading toward the Mediterranean Sea',
     className: 'journey journey--one',
+    slides: [
+      {
+        image: '/images/journey-mediterranean.webp',
+        alt: 'A quiet stone lane leading toward the Mediterranean Sea',
+        copy: 'Long lunches, small coastal stays and enough unplanned time to follow the day. A journey shaped around fewer places, longer stays and an unhurried rhythm.',
+      },
+      {
+        image: '/images/journey-mediterranean-02.jpg',
+        alt: 'A white terrace and wooden table overlooking the Aegean Sea',
+        copy: 'Mornings begin above the water, with nowhere to be too quickly. A simple terrace and an open horizon leave space for the day to unfold on its own.',
+      },
+      {
+        image: '/images/journey-mediterranean-03.jpg',
+        alt: 'Sailboats resting in clear water beside a rocky Mediterranean cove',
+        copy: 'A sheltered cove becomes the plan for the afternoon. Time on the water is balanced with quiet evenings back on shore and room to linger.',
+      },
+    ],
   },
   {
     number: '02',
     title: 'A winter escape in the Alps',
-    copy: 'Mountain mornings, warm interiors and days balanced between movement and rest. A winter itinerary with thoughtful transfers and space to settle in.',
-    image: '/images/journey-alps.webp',
-    alt: 'A snow-covered Alpine valley seen from a timber lodge',
     className: 'journey journey--two',
+    slides: [
+      {
+        image: '/images/journey-alps.webp',
+        alt: 'A snow-covered Alpine valley seen from a timber lodge',
+        copy: 'Mountain mornings, warm interiors and days balanced between movement and rest. A winter itinerary with thoughtful transfers and space to settle in.',
+      },
+      {
+        image: '/images/journey-alps-02.jpg',
+        alt: 'A timber lodge glowing beside a snow-covered mountain lake',
+        copy: 'The right lodge makes returning part of the day: warm light, an unhurried dinner and the mountains just beyond the windows. Each stay is chosen as carefully as the route.',
+      },
+      {
+        image: '/images/journey-alps-03.jpg',
+        alt: 'A small timber cabin tucked among pine trees in winter',
+        copy: 'Some days are deliberately small: a walk through the pines, a long lunch and a quiet afternoon indoors. The itinerary leaves space for rest without losing its sense of place.',
+      },
+    ],
   },
   {
     number: '03',
     title: 'Three cities, carefully connected',
-    copy: 'Three distinct places, joined without rush. The route, stays and travel days are considered together so each city has room to leave an impression.',
-    image: '/images/journey-cities.webp',
-    alt: 'A quiet European railway platform beneath an iron canopy',
     className: 'journey journey--three',
+    slides: [
+      {
+        image: '/images/journey-cities.webp',
+        alt: 'A quiet European railway platform beneath an iron canopy',
+        copy: 'Three distinct places, joined without rush. The route, stays and travel days are considered together so each city has room to leave an impression.',
+      },
+      {
+        image: '/images/journey-cities-02.jpg',
+        alt: 'Colorful balconies on an apartment building in Geneva',
+        copy: 'Between travel days, the details become more local: a balcony, a neighborhood market and a familiar route back to the hotel. Each stay gives the city time to feel lived in.',
+      },
+      {
+        image: '/images/journey-cities-03.jpg',
+        alt: 'A softly lit cafe seen through a rain-covered window',
+        copy: 'Rain changes the pace without changing the plan. A cafe pause, a nearby gallery and a well-placed reservation keep the day flexible and quietly connected.',
+      },
+    ],
   },
 ]
 
@@ -125,16 +169,7 @@ function App() {
 
             <div className="journeys__list">
               {journeys.map((journey) => (
-                <article className={journey.className + ' reveal'} key={journey.number}>
-                  <figure className="journey__image">
-                    <img src={journey.image} alt={journey.alt} loading="lazy" />
-                  </figure>
-                  <div className="journey__copy">
-                    <p className="item-number">Journey idea / {journey.number}</p>
-                    <h3>{journey.title}</h3>
-                    <p>{journey.copy}</p>
-                  </div>
-                </article>
+                <JourneyAlbum journey={journey} key={journey.number} />
               ))}
             </div>
           </div>
@@ -149,22 +184,7 @@ function App() {
                 </div>
                 <figcaption>Magdalena / portrait</figcaption>
               </figure>
-              <div className="about__cards" aria-label="Business card front and back">
-                <figure className="business-card">
-                  <div className="business-card__face business-card__face--front">
-                    <span className="business-card__name">Magdalena Rawecka</span>
-                    <span className="business-card__role">Independent Travel Advisor</span>
-                  </div>
-                  <figcaption>Front</figcaption>
-                </figure>
-                <figure className="business-card">
-                  <div className="business-card__face business-card__face--reverse">
-                    <span className="business-card__monogram">MR</span>
-                    <span className="business-card__tagline">Travel, thoughtfully arranged.</span>
-                  </div>
-                  <figcaption>Reverse</figcaption>
-                </figure>
-              </div>
+              <BusinessCardSleeve />
             </div>
             <div className="about__copy">
               <p className="section-label">About Magdalena</p>
