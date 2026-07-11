@@ -109,10 +109,10 @@ function App() {
           <p className="section-label">Services</p>
           <h2 id="services-title">One journey,<br />considered as a whole.</h2>
           <p className="services__summary">
-            I shape each trip around the way you want to travel, bringing the route, stays and practical details into one clear plan—and remaining available while you are away.
+            I shape each trip around the way you want to travel, bringing the route, stays and practical details into one clear plan. While you travel, I remain discreetly available—helping make sure each stay is ready for your arrival and stepping in only when needed.
           </p>
           <p className="services__scope" aria-label="Service scope">
-            Itinerary design <span aria-hidden="true">/</span> stays and reservations <span aria-hidden="true">/</span> travel coordination <span aria-hidden="true">/</span> support while away
+            Itinerary design <span aria-hidden="true">/</span> stays and reservations <span aria-hidden="true">/</span> travel coordination <span aria-hidden="true">/</span> quiet care along the way
           </p>
         </section>
 
