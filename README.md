@@ -17,6 +17,24 @@ npm run dev
 npm run build
 ```
 
+## WebHub pilot checks
+
+The controlled WebHub pilot uses the local, source-backed React/Vite adapter. A normal build strips
+all WebHub metadata. The dedicated gate separately creates a private local test manifest and proves
+that the instrumented public output contains only opaque Project, deployment, target, and source
+identifiers:
+
+```powershell
+npm ci
+npm run check
+npm test
+npm run test:webhub-production
+```
+
+The unpublished WebHub 0.2.0 build packages are pinned under `vendor/webhub` so a clean Vercel
+checkout never depends on a sibling folder. Private deployment manifests remain ignored under
+`.webhub`; never commit them or an instrumentation secret.
+
 ## Contact details
 
 Replace the clearly labelled email and phone placeholders in `src/contact.ts` before launch. The footer email, telephone, and “Begin a conversation” links all read from that file.
