@@ -125,7 +125,7 @@ function App() {
                 Personal travel planning for clients who want the details handled with care.
               </p>
             </div>
-            <p className="hero__note">From the first idea to the smallest detail.</p>
+            <p className="hero__note">From the first idea to every thoughtful detail.</p>
           </div>
           <figure className="hero__figure">
             <img
